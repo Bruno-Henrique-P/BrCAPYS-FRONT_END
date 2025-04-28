@@ -1,0 +1,27 @@
+:root {
+    --background-color: #121214;
+    --secondary-backgroun:#212529;
+    --input-color:#343B41;
+    --grey-1:#868E96;
+    --grey-2:#F8F9FA;
+    --primary-text:#FF577F;
+    --focus-text:#FF427F;
+    --negative-text:#59323F;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: #e1e1e6; /* Cor recomendada para texto sobre o fundo escuro */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
+  }
+  
+
+#root {
+    min-height: 100vh;
+    background-color: inherit;
+}
+  

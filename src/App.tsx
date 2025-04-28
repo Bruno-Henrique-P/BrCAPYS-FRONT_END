@@ -1,17 +1,17 @@
-import { useState } from 'react'
+
+import Register from "./pages/cadastro/cadastro"
+import Login from "./pages/login/login"
+import { Routes, Route } from 'react-router-dom';
 
 
 function App() {
-  const [count, setCount] = useState(0)
-  setCount(1);
-  console.log(count);
   return (
-    <>
-      <div>
-        <h3>Teste Frontend PL </h3>
-      </div>
-    </>
-  )
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/" element={<Login />} />
+    </Routes>
+  );
 }
 
 export default App

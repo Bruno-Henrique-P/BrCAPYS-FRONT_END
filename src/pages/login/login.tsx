@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import '../../assets/login.css';
 import '../../auth.css'
 
@@ -22,8 +23,8 @@ export default function Login() {
   return (
   
     <div className="login-page-container">
-      {/* Título principal acima do card */}
-      <h1 className="system-title">capys</h1>
+       
+      <img src='/capyslogo.png' className="system-title"></img>
 
     <div className='login-container'>
       
@@ -51,13 +52,14 @@ export default function Login() {
         </div>
         
         <button
+        onClick={()=>{navigate('/homepage')}}
           className="login-button"
         >
           Entrar
         </button>
       </form>
 
-      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+      <div >
       <span className="prompt-text">Ainda não possui uma conta?</span>
         <button
           onClick={() => navigateToCadastro()}

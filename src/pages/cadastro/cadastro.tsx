@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
+import '../../assets/cadastro.css'
+
+type Cargo = {
+  id: string;
+  nome: string;
+};
 
 
 interface RegisterForm {
@@ -7,15 +13,28 @@ interface RegisterForm {
   email: string;
   password: string;
   confirmPassword: string;
+  bio:string;
+  contato:string;
+  cargo:Cargo | null;
 }
+const availableJobs: Cargo[] = [
+  { id: '1', nome: 'Desenvolvedor Front-end' },
+  { id: '2', nome: 'Desenvolvedor Back-end' },
+];
 
 export default function Register() {
   const [formData, setFormData] = useState<RegisterForm>({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    bio:'',
+    contato:'',
+    cargo: null
+    
   });
+
+
   const [errors, setErrors] = useState<Partial<RegisterForm>>({});
   const navigate = useNavigate();
 
@@ -54,7 +73,6 @@ export default function Register() {
     e.preventDefault();
     
     if (validate()) {
-      // Simulação de cadastro bem-sucedido
       console.log('Dados de cadastro:', formData);
       alert('Cadastro realizado com sucesso!');
       navigate('/login');
@@ -62,9 +80,16 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>Cadastro</h1>
+    <div className="register-page-container">
+      <div className='system-register-title'>
+        <img src='/capyslogo.png' className='register-title'></img>
+        <button className='btn-voltar' onClick={() => navigate('/login')}>voltar</button>
+      </div>
+      <div className="register-container">
+        <div className='title-register'>
+          <h1>Cadastro</h1>
+          <h2>Rapido e gratis, vamos nessa</h2>
+        </div>
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -75,6 +100,7 @@ export default function Register() {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              className='form-input'
               required
             />
             {errors.name && <div className="error-message">{errors.name}</div>}
@@ -88,6 +114,7 @@ export default function Register() {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              className='form-input'
               required
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
@@ -101,6 +128,7 @@ export default function Register() {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              className='form-input'
               required
             />
             {errors.password && <div className="error-message">{errors.password}</div>}
@@ -114,19 +142,75 @@ export default function Register() {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
+              className='form-input'
               required
             />
             {errors.confirmPassword && (
               <div className="error-message">{errors.confirmPassword}</div>
             )}
           </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Bio</label>
+            <input
+              type="text"
+              id="bio"
+              name="bio"
+              value={formData.bio}
+              onChange={handleChange}
+              className='form-input'
+              required
+            />
+            {errors.confirmPassword && (
+              <div className="error-message">{errors.confirmPassword}</div>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Contato</label>
+            <input
+              type="text"
+              id="contato"
+              name="contato"
+              value={formData.contato}
+              onChange={handleChange}
+              className='form-input'
+              required
+            />
+            {errors.confirmPassword && (
+              <div className="error-message">{errors.confirmPassword}</div>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Selecionar Cargo</label>
+            <select
+            
+            id="cargo"
+            name="cargo"
+            className='select-input'
+            value={formData.cargo?.id || ''}
+            
+            
+            required
+          >
+            <option value="" disabled>
+              Selecione seu cargo
+            </option>
+            {availableJobs.map((cargo) => (
+              <option key={cargo.id} value={cargo.id}>
+                {cargo.nome}
+              </option>
+            ))}
+          </select>
+            {errors.confirmPassword && (
+              <div className="error-message">{errors.confirmPassword}</div>
+            )}
+          </div>
           
-          <button type="submit" className="auth-button">Cadastrar</button>
+          <button type="submit" className="login-button">Cadastrar</button>
         </form>
         
-        <div className="auth-link">
-          Já tem uma conta? <Link to="/login">Faça login</Link>
-        </div>
       </div>
     </div>
   );
